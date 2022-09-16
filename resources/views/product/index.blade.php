@@ -35,6 +35,7 @@
                                     <td>{{ $product->deskripsi }}</td>
                                     <td class="text-center">
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('product.destroy', $product->id) }}" method="POST">
+                                            <a href="{{ route('product.show',$product->id) }}" class="btn btn-sm btn-primary">SHOW</a>
                                             <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                                             @csrf
                                             @method('DELETE')

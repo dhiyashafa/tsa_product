@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Product;
-
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -48,17 +46,17 @@ class ProductController extends Controller
             'gambar'       => 'required|image|mimes:png,jpg,jpeg',
             'deskripsi'         => 'required'
         ]);
-
+    
         //upload gambar
         $gambar = $request->file('gambar');
         $gambar->storeAs('public/products', $gambar->hashName());
-
+    
         $product = Product::create([
             'namaproduk' => $request->namaproduk,
             'gambar'   => $gambar->hashName(),
             'deskripsi'     => $request->deskripsi
         ]);
-
+    
         if($product){
             //redirect dengan pesan sukses
             return redirect()->route('product.index')->with(['success' => 'Data Berhasil Disimpan!']);
@@ -76,7 +74,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        return view('product.show',compact('product'),[
+            'title' => 'Product Tampil'
+        ]);
     }
 
     /**
