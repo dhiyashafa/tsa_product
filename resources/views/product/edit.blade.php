@@ -9,18 +9,19 @@
 </head>
 <body style="background: lightgray">
 
-<div class="container mt-5 mb-5">
+    <div class="container mt-5 mb-5">
+        <h2> Edit Isi Produk</h2>
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
-                        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
-
+                        <form action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
 
                             <div class="form-group">
                                 <label class="font-weight-bold">NAMA PRODUK</label>
-                                <input type="text" class="form-control @error('namaproduk') is-invalid @enderror" name="namaproduk" value="{{ old('namaproduk') }}" placeholder="Masukkan product rumah">
+                                <input type="text" class="form-control @error('namaproduk') is-invalid @enderror" name="namaproduk" value="{{ old('namaproduk', $product->namaproduk) }}" placeholder="Masukkan Kategori Rumah">
 
                                 <!-- error message untuk namaproduk -->
                                 @error('namaproduk')
@@ -32,19 +33,12 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">GAMBAR</label>
-                                <input type="file" class="form-control @error('gambar') is-invalid @enderror" name="gambar">
-
-                                <!-- error message untuk namaproduk -->
-                                @error('gambar')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <input type="file" class="form-control" name="gambar">
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">DESKRIPSI</label>
-                                <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi') }}" placeholder="Masukkan deskripsi rumah">
+                                <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi', $product->deskripsi) }}" placeholder="Masukkan deskripsi">
 
                                 <!-- error message untuk deskripsi -->
                                 @error('deskripsi')
@@ -54,7 +48,8 @@
                                 @enderror
                             </div>
 
-                            <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
+
+                            <button type="submit" class="btn btn-md btn-primary">UPDATE</button>
                             <button type="reset" class="btn btn-md btn-warning">RESET</button>
 
                         </form> 
@@ -63,5 +58,5 @@
             </div>
         </div>
     </div>
-    </body>
+</body>
 </html>
